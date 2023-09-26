@@ -1,29 +1,33 @@
 import { Module } from '@nestjs/common';
-import { BookingController } from './internal/booking/booking.controller';
-import { AnimalModule } from './internal/animal/animal.module';
-import { BookingModule } from './internal/booking/booking.module';
-import { PaymentModule } from './internal/payment/payment.module';
-import { TokenModule } from './internal/token/token.module';
-import { UserModule } from './internal/user/user.module';
-import { LoggerModule } from './modules/logger/logger.module';
-import { ProductModule } from './internal/product/product.module';
-import { ExceptionModule } from './modules/exception/exception.module';
-import { LocalStrategy } from './modules/passport/local.strategy';
-import { JwtStrategy } from './modules/passport/jwt.strategy';
-import { JwtRefreshTokenStrategy } from './modules/passport/jwtRefresh.strategy';
+import { PassportModule } from '@nestjs/passport';
+import { JwtModule } from '@nestjs/jwt';
+import { LoggerModule } from './infrastructure/logger/logger.module';
+import { ExceptionsModule } from './infrastructure/exceptions/exceptions.module';
+import { ControllersModule } from './infrastructure/controllers/controllers.module';
+import { BcryptModule } from './infrastructure/adapters/bcrypt/bcrypt.module';
+import { JwtModule as JwtServiceModule } from './infrastructure/adapters/jwt/jwt.module';
+import { LocalStrategy } from './infrastructure/common/strategies/local.strategy';
+import { JwtStrategy } from './infrastructure/common/strategies/jwt.strategy';
+import { JwtRefreshTokenStrategy } from './infrastructure/common/strategies/jwtRefresh.strategy';
+import { MongooseModule } from '@nestjs/mongoose';
+import { AuthModule } from './infrastructure/controllers/auth/auth.module';
+import { EnvironmentConfigModule } from './infrastructure/config/environment-config/environment-config.module';
 
 @Module({
     imports: [
-        AnimalModule,
-        BookingModule,
-        PaymentModule,
-        TokenModule,
-        UserModule,
+        EnvironmentConfigModule,
+        PassportModule,
+        JwtModule.register({
+            secret: process.env.secret,
+        }),
         LoggerModule,
-        ProductModule,
-        ExceptionModule,
+        ExceptionsModule,
+        ControllersModule,
+        BcryptModule,
+        JwtServiceModule,
+        MongooseModule.forRoot('mongodb://localhost/nest'),
+        AuthModule,
     ],
-    controllers: [BookingController],
     providers: [LocalStrategy, JwtStrategy, JwtRefreshTokenStrategy],
 })
 export class AppModule {}
