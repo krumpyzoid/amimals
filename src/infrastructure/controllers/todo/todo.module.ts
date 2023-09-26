@@ -1,4 +1,3 @@
-import { ILogger } from '../../../domain/logger/logger.interface';
 import { Module } from '@nestjs/common';
 import { ExceptionsModule } from '../../exceptions/exceptions.module';
 import { LoggerModule } from '../../logger/logger.module';
@@ -12,31 +11,21 @@ import { RepositoriesModule } from 'src/infrastructure/repositories/repositories
 
 @Module({
     imports: [LoggerModule, ExceptionsModule, RepositoriesModule],
-    exports: ['AddTodoUseCases', 'GetTodoUseCases', 'UpdateTodoUseCases', 'DeleteTodoUseCases'],
+    exports: [
+        AddTodoUseCases,
+        GetTodoUseCases,
+        UpdateTodoUseCases,
+        DeleteTodoUseCases,
+        DatabaseTodoRepository,
+        LoggerService,
+    ],
     providers: [
-        {
-            provide: 'AddTodoUseCases',
-            useFactory: (logger: ILogger, todoRepository: DatabaseTodoRepository) =>
-                new AddTodoUseCases(logger, todoRepository),
-            inject: [LoggerService, DatabaseTodoRepository],
-        },
-        {
-            provide: 'GetTodoUseCases',
-            useFactory: (todoRepository: DatabaseTodoRepository) => new GetTodoUseCases(todoRepository),
-            inject: [LoggerService, DatabaseTodoRepository],
-        },
-        {
-            provide: 'UpdateTodoUseCases',
-            useFactory: (logger: ILogger, todoRepository: DatabaseTodoRepository) =>
-                new UpdateTodoUseCases(logger, todoRepository),
-            inject: [LoggerService, DatabaseTodoRepository],
-        },
-        {
-            provide: 'DeleteTodoUseCases',
-            useFactory: (logger: ILogger, todoRepository: DatabaseTodoRepository) =>
-                new DeleteTodoUseCases(logger, todoRepository),
-            inject: [LoggerService, DatabaseTodoRepository],
-        },
+        AddTodoUseCases,
+        GetTodoUseCases,
+        UpdateTodoUseCases,
+        DeleteTodoUseCases,
+        DatabaseTodoRepository,
+        LoggerService,
     ],
 })
 export class TodoModule {}

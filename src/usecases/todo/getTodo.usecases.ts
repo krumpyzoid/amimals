@@ -2,11 +2,12 @@ import { Inject, Injectable } from '@nestjs/common';
 
 import { TodoM } from '../../domain/models/todo';
 import { TodoRepository } from '../../domain/repositories/todoRepository.interface';
+import { DatabaseTodoRepository } from 'src/infrastructure/repositories/todo.repository';
 
 @Injectable()
 export class GetTodoUseCases {
     constructor(
-        @Inject('DatabaseTodoRepository')
+        @Inject(DatabaseTodoRepository)
         private readonly todoRepository: TodoRepository,
     ) {}
 

@@ -23,11 +23,11 @@ import { ApiResponseType } from '../../common/swagger/response.decorator';
 @ApiExtraModels(IsAuthPresenter)
 export class AuthController {
     constructor(
-        @Inject('LoginUseCases')
+        @Inject(LoginUseCases)
         private readonly loginUsecases: LoginUseCases,
-        @Inject('LogoutUseCases')
+        @Inject(LogoutUseCases)
         private readonly logoutUsecases: LogoutUseCases,
-        @Inject('IsAuthenticatedUseCases')
+        @Inject(IsAuthenticatedUseCases)
         private readonly isAuthUsecases: IsAuthenticatedUseCases,
     ) {}
 

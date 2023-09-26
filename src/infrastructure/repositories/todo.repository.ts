@@ -49,7 +49,11 @@ export class DatabaseTodoRepository implements TodoRepository {
 
     private toTodoEntity(todo: TodoM): Todo {
         const todoEntity: Todo = new Todo();
-
+        todoEntity.id = todo.id;
+        todoEntity.content = todo.content;
+        todoEntity.is_done = todo.isDone;
+        todoEntity.created_at = todo.createdDate;
+        todoEntity.updated_at = todo.updatedDate;
         return todoEntity;
     }
 }

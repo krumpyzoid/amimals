@@ -14,13 +14,13 @@ import { AddTodoUseCases } from '../../../usecases/todo/addTodo.usecases';
 @ApiExtraModels(TodoPresenter)
 export class TodoController {
     constructor(
-        @Inject('GetTodoUseCases')
+        @Inject(GetTodoUseCases)
         private getTodoUsecases: GetTodoUseCases,
-        @Inject('UpdateTodoUseCases')
+        @Inject(UpdateTodoUseCases)
         private updateTodoUsecases: UpdateTodoUseCases,
-        @Inject('DeleteTodoUseCases')
+        @Inject(DeleteTodoUseCases)
         private deleteTodoUsecases: DeleteTodoUseCases,
-        @Inject('AddTodoUseCases')
+        @Inject(AddTodoUseCases)
         private addTodoUsecases: AddTodoUseCases,
     ) {}
 
