@@ -10,7 +10,6 @@ import { LocalStrategy } from './infrastructure/common/strategies/local.strategy
 import { JwtStrategy } from './infrastructure/common/strategies/jwt.strategy';
 import { JwtRefreshTokenStrategy } from './infrastructure/common/strategies/jwtRefresh.strategy';
 import { MongooseModule } from '@nestjs/mongoose';
-import { AuthModule } from './infrastructure/controllers/auth/auth.module';
 import { EnvironmentConfigModule } from './infrastructure/config/environment-config/environment-config.module';
 
 @Module({
@@ -26,7 +25,6 @@ import { EnvironmentConfigModule } from './infrastructure/config/environment-con
         BcryptModule,
         JwtServiceModule,
         MongooseModule.forRoot('mongodb://localhost/nest'),
-        AuthModule,
     ],
     providers: [LocalStrategy, JwtStrategy, JwtRefreshTokenStrategy],
 })
