@@ -3,7 +3,7 @@ import { TodoM } from '../../../domain/models/todo';
 
 export class TodoPresenter {
     @ApiProperty()
-    id: number;
+    id: string;
     @ApiProperty()
     content: string;
     @ApiProperty()

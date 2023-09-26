@@ -8,7 +8,7 @@ import config from './environment-config';
     imports: [
         ConfigModule.forRoot({
             load: [config],
-            ignoreEnvFile: process.env.NODE_ENV === 'local' || process.env.NODE_ENV === 'test' ? false : true,
+            ignoreEnvFile: false,
             isGlobal: true,
             validate,
         }),

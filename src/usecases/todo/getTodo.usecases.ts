@@ -1,10 +1,16 @@
+import { Inject, Injectable } from '@nestjs/common';
+
 import { TodoM } from '../../domain/models/todo';
 import { TodoRepository } from '../../domain/repositories/todoRepository.interface';
 
+@Injectable()
 export class GetTodoUseCases {
-    constructor(private readonly todoRepository: TodoRepository) {}
+    constructor(
+        @Inject('DatabaseTodoRepository')
+        private readonly todoRepository: TodoRepository,
+    ) {}
 
-    async byId(id: number): Promise<TodoM> {
+    async byId(id: string): Promise<TodoM> {
         return await this.todoRepository.findById(id);
     }
 

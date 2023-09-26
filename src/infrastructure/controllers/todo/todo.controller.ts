@@ -26,7 +26,7 @@ export class TodoController {
 
     @Get('todo')
     @ApiResponseType(TodoPresenter, false)
-    async getTodo(@Query('id', ParseIntPipe) id: number) {
+    async getTodo(@Query('id', ParseIntPipe) id: string) {
         const todo = await this.getTodoUsecases.byId(id);
         return new TodoPresenter(todo);
     }
@@ -48,7 +48,7 @@ export class TodoController {
 
     @Delete('todo')
     @ApiResponseType(TodoPresenter, true)
-    async deleteTodo(@Query('id', ParseIntPipe) id: number) {
+    async deleteTodo(@Query('id', ParseIntPipe) id: string) {
         await this.deleteTodoUsecases.execute(id);
         return 'success';
     }

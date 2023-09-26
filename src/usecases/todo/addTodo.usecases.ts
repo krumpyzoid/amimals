@@ -1,7 +1,9 @@
+import { Injectable } from '@nestjs/common';
 import { ILogger } from '../../domain/logger/logger.interface';
 import { TodoM } from '../../domain/models/todo';
 import { TodoRepository } from '../../domain/repositories/todoRepository.interface';
 
+@Injectable()
 export class AddTodoUseCases {
     constructor(
         private readonly logger: ILogger,
